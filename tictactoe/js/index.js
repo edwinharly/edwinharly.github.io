@@ -4,48 +4,199 @@ $(document).ready(function() {
     var count = 0;
     var o_win = 0;
     var x_win = 0;
-    var squares = $('#game li');
+    var squares = $('#tic-tac-toe #game li');
+    var selectContainer = document.getElementById('select-container');
+    var play = document.getElementById('play');
+    var maxBoardSize = 10;
+    var board = document.getElementById('game');
 
-    var hasClassO = function() {
-        if (arguments.length <= 0)
-            return false;
-        for (var i = 0; i < arguments.length; i++) {
-            if (!$(arguments[i]).hasClass('o'))
+    var initGame = function() {
+        $('.setting').each(function() {
+            this.style.display = 'inline';
+        })
+        $('.playing').each(function() {
+            this.style.display = 'none';
+        })
+
+        if (selectContainer.childElementCount <= 0) {
+            for (var i = 3; i <= maxBoardSize; i++) {
+                var option = document.createElement('option');
+                option.innerText = i.toString() + ' x ' + i.toString();
+                option.setAttribute('value', i);
+                selectContainer.appendChild(option);
+            }
+        }
+
+        board.innerHTML = '';
+    }
+
+    var registerEventListener = function(elements) {
+        elements.click(function(){
+            if (isOWin()) {
+                alert('O has won the game. Start a new game')
+                restartTheGame();
+            }
+            else if (isXWin()) {
+                alert('X wins has won the game. Start a new game')
+                restartTheGame();
+            }
+            else if (isTie()) {
+                alert('Its a tie. It will restart.')
+                restartTheGame();
+            }
+            else if (isSquareSelected(this)) {
+                alert('Already selected')
+            }
+            else if (isOTurn()) {
+                OMakeAMove(this);
+                if (isOWin()) {
+                    OWins();
+                }
+            }
+            else {
+                XMakeAMove(this);
+                if (isXWin()) {
+                    XWins();
+                }
+            }
+        });
+    }
+
+    var renderBoard = function() {
+        var boardSize = parseInt(selectContainer.options[selectContainer.selectedIndex].value);
+        var counter = 0;
+        for (var i = 0; i < boardSize; i++) {
+            var row = document.createElement('div');
+
+            for (var j = 0; j < boardSize; j++) {
+                counter++;
+                var square = document.createElement('li');
+                square.innerText = '+';
+                square.setAttribute('id', counter.toString());
+                square.setAttribute('class', 'btn span1');
+                row.appendChild(square);
+            }
+
+            board.appendChild(row);
+        }
+
+        squares = $('#tic-tac-toe #game li');
+        registerEventListener(squares);
+    }
+
+    var startGame = function() {
+        $('.setting').each(function() {
+            this.style.display = 'none';
+        })
+        $('.playing').each(function() {
+            this.style.display = 'flex';
+        })
+        renderBoard();
+    }
+
+    play.addEventListener('click', function(event) {
+        event.preventDefault();
+        startGame();
+    });
+
+    var hasClassO = function(arr) {
+        for (var i = 0; i < arr.length; i++) {
+            if (!$('#' + (arr[i]).toString()).hasClass('o')) {
                 return false;
+            }
         }
         return true;
     };
 
-    var hasClassX = function() {
-        if (arguments.length <= 0)
-            return false;
-        for (var i = 0; i < arguments.length; i++) {
-            if (!$(arguments[i]).hasClass('x'))
+    var hasClassX = function(arr) {
+        for (var i = 0; i < arr.length; i++) {
+            if (!$('#' + (arr[i]).toString()).hasClass('x')) {
                 return false;
+            }
         }
         return true;
     };
 
     var isOWin = function() {
-        return hasClassO('#one', '#two', '#three') || 
-               hasClassO('#four', '#five', '#six') ||
-               hasClassO('#seven', '#eight', '#nine') ||
-               hasClassO('#one', '#four', '#seven') ||
-               hasClassO('#two', '#five', '#eight') ||
-               hasClassO('#three', '#six', '#nine') ||
-               hasClassO('#one', '#five', '#nine') ||
-               hasClassO('#three', '#five', '#seven')
+        var step = Math.sqrt(getBoardSize());
+        // horizontal
+        for (var i = 1; i <= getBoardSize(); i += step) {
+            var arr = [];
+            for (var j = 0; j < step; j++) {
+                arr.push(i + j);
+            }
+            if (hasClassO(arr)) {
+                return true;
+            }
+        }
+        // vertical
+        for (var i = 1; i <= step; i++) {
+            var arr = [];
+            for (var j = 0; j < step; j++) {
+                arr.push(i + (j * step));
+            }
+            if (hasClassO(arr)) {
+                return true;
+            }
+        }
+        // diagonal
+        var arr = [];
+        for (var i = 1; i <= getBoardSize(); i += step + 1) {
+            arr.push(i);
+        }
+        if (hasClassO(arr)) {
+            return true;
+        }
+
+        arr = [];
+        for (var i = step; i < getBoardSize(); i += (step - 1)) {
+            arr.push(i);
+        }
+        if (hasClassO(arr)) {
+            return true;
+        }
+        return false;
     };
 
     var isXWin = function() {
-        return hasClassX('#one', '#two', '#three') || 
-               hasClassX('#four', '#five', '#six') ||
-               hasClassX('#seven', '#eight', '#nine') ||
-               hasClassX('#one', '#four', '#seven') ||
-               hasClassX('#two', '#five', '#eight') ||
-               hasClassX('#three', '#six', '#nine') ||
-               hasClassX('#one', '#five', '#nine') ||
-               hasClassX('#three', '#five', '#seven')
+        var step = Math.sqrt(getBoardSize());
+        // horizontal
+        for (var i = 1; i <= getBoardSize(); i += step) {
+            var arr = [];
+            for (var j = 0; j < step; j++) {
+                arr.push(i + j);
+            }
+            if (hasClassX(arr)) {
+                return true;
+            }
+        }
+        // vertical
+        for (var i = 1; i <= step; i++) {
+            var arr = [];
+            for (var j = 0; j < step; j++) {
+                arr.push(i + (j * step));
+            }
+            if (hasClassX(arr)) {
+                return true;
+            }
+        }
+        // diagonal
+        var arr = [];
+        for (var i = 1; i <= getBoardSize(); i += step + 1) {
+            arr.push(i);
+        }
+        if (hasClassX(arr)) {
+            return true;
+        }
+
+        arr = [];
+        for (var i = step; i < getBoardSize(); i += (step - 1)) {
+            arr.push(i);
+        }
+        if (hasClassX(arr)) {
+            return true;
+        }
+        return false;
     };
 
     var restartTheGame = function() {
@@ -58,8 +209,13 @@ $(document).ready(function() {
         count = 0;
     }
 
+    var getBoardSize = function() {
+        var boardSize = parseInt(selectContainer.options[selectContainer.selectedIndex].value);
+        return Math.pow(boardSize, 2);
+    }
+
     var isTie = function() {
-        return count == 9;
+        return count == getBoardSize();
     }
 
     var OWins = function() {
@@ -96,37 +252,10 @@ $(document).ready(function() {
         return $(square).hasClass('disable')
     }
 
-    squares.click(function(){
-        if (isOWin()) {
-            alert('O has won the game. Start a new game')
-            restartTheGame();
-        }
-        else if (isXWin()) {
-            alert('X wins has won the game. Start a new game')
-            restartTheGame();
-        }
-        else if (isTie()) {
-            alert('Its a tie. It will restart.')
-            restartTheGame();
-        }
-        else if (isSquareSelected()) {
-            alert('Already selected')
-        }
-        else if (isOTurn()) {
-            OMakeAMove(this);
-            if (isOWin()) {
-                OWins();
-            }
-        }
-        else {
-            XMakeAMove(this);
-            if (isXWin()) {
-                XWins();
-            }
-        }
-    });
-
     $("#reset").click(function () {
         restartTheGame();
+        initGame();
     });
+
+    initGame();
 });
