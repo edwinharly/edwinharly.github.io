@@ -1,0 +1,19 @@
+.User__container {
+
+}
+
+.User__container a {
+  color: palegreen;
+}
+
+.User__container a:visited {
+  text-decoration: none;
+}
+
+.User__name {
+  font-weight: bold;
+}
+
+.User__website {
+
+}

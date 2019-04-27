@@ -19,19 +19,23 @@ class App extends React.Component {
     const { page } = this.state;
 
     return (
-      <div>
-        <h1>Hello App</h1>
-        <ul>
+      <div className='container'>
+        <h1>Hi!</h1>
+        <ul className='nav'>
           <li>
-            <a href="#" onClick={() => this.switchToPage(1)}>Page 1</a>
+            <a className={page === 1 ? 'active' : 'inactive'} href="#" onClick={() => this.switchToPage(1)}>
+              My Feed
+            </a>
           </li>
           <li>
-            <a href="#" onClick={() => this.switchToPage(2)}>Page 2</a>
+            <a className={page === 2 ? 'active' : 'inactive'} href="#" onClick={() => this.switchToPage(2)}>
+              My Tracks
+            </a>
           </li>
         </ul>
         {page === 1 && (<Page1 />)}
         {page === 2 && (<Page2 />)}
-      </div>
+      </div >
     )
   }
 }

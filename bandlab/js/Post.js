@@ -29,16 +29,15 @@ class Post extends React.Component {
     const { user } = this.state
 
     return (
-      <div>
-        {user && (
-          <User userData={user} />
-        )}
-        <div>
-          <h2>{postData.title}</h2>
-          <p>{postData.body}</p>
-        </div>
-        <hr />
+      <div className='Post__container'>
+        <p className='Post__title'>
+          {postData.title}
+        </p>
+        {user && <User userData={user} />}
+        <p className='Post__content'>
+          {postData.body}
+        </p>
       </div>
-    )
+    );
   }
 }

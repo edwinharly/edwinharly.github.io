@@ -41,7 +41,7 @@ class Page1 extends React.Component {
     const { isAsc, posts } = this.state;
     return (
       <div>
-        <h2>Page 1</h2>
+        <h2>My Feed</h2>
         {isAsc ? (
           <button onClick={() => this.sortPosts(false)}>
             Sort Descending
@@ -51,10 +51,11 @@ class Page1 extends React.Component {
               Sort Ascending
           </button>
           )}
-
-        {posts.map((post) => (
-          <Post key={post.id} postData={post} />
-        ))}
+        <div className='Page1__postsContainer'>
+          {posts.map((post) => (
+            <Post key={post.id} postData={post} />
+          ))}
+        </div>
       </div>
     )
   }
