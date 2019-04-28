@@ -1,0 +1,18 @@
+@media all and (min-device-width: 600px) {
+  .Track__container {
+    font-size: 18px;
+    max-width: 300px;
+  }
+}
+
+@media all and (max-device-width: 599px) {
+
+  .Track__container {
+    width: 90%;
+  }
+
+}
+
+.Track__container > button {
+    text-align: center;
+}

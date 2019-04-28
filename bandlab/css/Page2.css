@@ -1,25 +1,28 @@
-@media all and (max-device-width: 600px) {
+@media all and (max-device-width: 599) {
   .Page2__container > button, .Page2__track > button {
     font-size: 36px;
     margin: 10px;
   }
 
-  .Page2__track {
-    font-size: 48px;
-  }
-
   .Page2__container > p {
     font-size: 48px;
   }
-}
-.Page2__track {
-  text-align: left;
-  margin: 10px;
-  max-width: 700px;
-  margin: 20px auto;
+
+  .Page2__tracksContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+  }
 }
 
-.Page2__track audio {
-  width: 100%;
-  max-width: 700px;
+@media all and (min-device-width: 600px) {
+  .Page2__tracksContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+  }
 }

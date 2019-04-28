@@ -33,6 +33,7 @@ class App extends React.Component {
             </a>
           </li>
         </ul>
+        <br/>
         {page === 1 && (<Page1 />)}
         {page === 2 && (<Page2 />)}
       </div >

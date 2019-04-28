@@ -29,7 +29,7 @@ class Post extends React.Component {
     const { user } = this.state
 
     return (
-      <div className='Post__container'>
+      <div className='Post__container card'>
         <p className='Post__title'>
           {postData.title}
         </p>

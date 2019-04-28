@@ -85,6 +85,9 @@ class Page2 extends React.Component {
     return (
       <div className='Page2__container'>
         <p>My Tracks</p>
+        <span>Add new track (url):</span>
+        <input></input><button className='btn addBtn'>Add</button>
+        <br />
         {playing >= 0 && (
           <p>
             {isPaused ? 'Paused' : 'Playing'}: {this.getTrackName(tracks[playing])}
@@ -99,20 +102,18 @@ class Page2 extends React.Component {
         <button className='btn nextBtn' onClick={this.nextTrack}>
           Next
         </button>
-        {tracks.map((track, key) => {
-          const tmp = track.split('/');
-          const trackTitle = tmp[tmp.length - 1];
-          return (
-            <div className='Page2__track'>
-              <div>{trackTitle}</div>
-              <button className='btn playBtn' onClick={() => this.playAudio(key)}>Play</button>
-              {/* <audio ref={(input) => this.audioRef = input} key={key} controls>
-                <source src={track} type='audio/ogg'></source>
-                Your browser does not support audio element
-              </audio> */}
-            </div>
-          )
-        })}
+        <div className='Page2__tracksContainer'>
+          {tracks.map((track, key) => {
+            const tmp = track.split('/');
+            const trackTitle = tmp[tmp.length - 1];
+            return (
+              <Track 
+                key={trackTitle}
+                trackTitle={trackTitle} 
+                handlePlay={() => this.playAudio(key)} />
+            )
+          })}
+        </div>
       </div>
     )
   }
