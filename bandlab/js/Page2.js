@@ -76,8 +76,8 @@ class Page2 extends React.Component {
   render() {
     const { tracks, playing } = this.state;
     return (
-      <div>
-        <h2>My Tracks</h2>
+      <div className='Page2__container'>
+        <p>My Tracks</p>
         {playing >= 0 && (
           <p>
             Currently playing: {this.getTrackName(tracks[playing])}

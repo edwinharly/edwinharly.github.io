@@ -1,7 +1,27 @@
-.Page1__postsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  text-align: left;
+@media all and (min-device-width: 600px) {
+  .Page1__postsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+  }
+}
+
+@media all and (max-device-width: 599px) {
+  .Page1__postsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+  }
+
+  .Page1__container > button {
+    font-size: 36px;
+  }
+
+  .Page1__container > p {
+    font-size: 48px;
+  }
 }

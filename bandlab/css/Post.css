@@ -1,4 +1,4 @@
-@media all and (min-width: 600px) {
+@media all and (min-device-width: 600px) {
 
   .Post__container {
     max-width: 400px;
@@ -6,10 +6,10 @@
 
 }
 
-@media all and (max-width: 599px) {
+@media all and (max-device-width: 599px) {
 
   .Post__container {
-    max-width: 550px;
+    width: 90%;
   }
 
 }

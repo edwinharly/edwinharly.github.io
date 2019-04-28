@@ -20,7 +20,7 @@ class App extends React.Component {
 
     return (
       <div className='container'>
-        <h1>Hi!</h1>
+        <p className='app_title'>Hi!</p>
         <ul className='nav'>
           <li>
             <a className={page === 1 ? 'active' : 'inactive'} href="#" onClick={() => this.switchToPage(1)}>
