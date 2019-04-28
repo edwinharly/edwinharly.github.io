@@ -73,6 +73,10 @@ body {
   background-color: blueviolet;
 }
 
+.deleteBtn {
+  background-color: darkred;
+}
+
 .card {
   margin: 10px;
   padding: 20px;

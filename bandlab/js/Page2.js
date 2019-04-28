@@ -9,6 +9,7 @@ class Page2 extends React.Component {
         'https://static.bandlab.com/soundbanks/previews/new-wave-kit.ogg',
         'https://static.bandlab.com/soundbanks/previews/synth-organ.ogg',
       ],
+      newUrlInput: '',
     }
 
     this.playAudio = this.playAudio.bind(this)
@@ -60,8 +61,11 @@ class Page2 extends React.Component {
   }
 
   getTrackName(url) {
-    const arr = url.split('/')
-    return arr[arr.length - 1].split('.')[0];
+    if (typeof url === 'string') {
+      const arr = url.split('/')
+      return arr[arr.length - 1].split('.')[0];
+    }
+    return ''
   }
 
   pauseOrPlay() {
@@ -80,13 +84,38 @@ class Page2 extends React.Component {
     }
   }
 
+  addNewTrack(newUrl) {
+    const tracks = [...this.state.tracks, newUrl];
+    this.setState({
+      tracks,
+      newUrlInput: '',
+    });
+  }
+
+  removeTrack(removedIndex) {
+    const { tracks, playing } = this.state;
+    const filteredTracks = tracks.filter((track, index) => index !== removedIndex)
+    if (playing === removedIndex) {
+      this.currentAudio.pause();
+      this.currentAudio = null;
+      this.setState({
+        playing: -1,
+        isPaused: false,
+      })
+    }
+    this.setState({
+      tracks: filteredTracks,
+    })
+  }
+
   render() {
-    const { tracks, playing, isPaused } = this.state;
+    const { tracks, playing, isPaused, newUrlInput } = this.state;
     return (
       <div className='Page2__container'>
         <p>My Tracks</p>
         <span>Add new track (url):</span>
-        <input></input><button className='btn addBtn'>Add</button>
+        <input value={newUrlInput} onChange={(evt) => this.setState({newUrlInput: evt.target.value})} />
+        <button onClick={() => this.addNewTrack(newUrlInput)} className='btn addBtn'>Add</button>
         <br />
         {playing >= 0 && (
           <p>
@@ -108,8 +137,9 @@ class Page2 extends React.Component {
             const trackTitle = tmp[tmp.length - 1];
             return (
               <Track 
-                key={trackTitle}
+                key={key}
                 trackTitle={trackTitle} 
+                handleRemove={() => this.removeTrack(key)}
                 handlePlay={() => this.playAudio(key)} />
             )
           })}
