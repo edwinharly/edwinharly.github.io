@@ -4,7 +4,7 @@ class Page2 extends React.Component {
 
     this.state = {
       playing: -1,
-      loop: false,
+      isPaused: false,
       tracks: [
         'https://static.bandlab.com/soundbanks/previews/new-wave-kit.ogg',
         'https://static.bandlab.com/soundbanks/previews/synth-organ.ogg',
@@ -46,7 +46,8 @@ class Page2 extends React.Component {
     this.currentAudio.play()
 
     this.setState({
-      playing: validIndex
+      playing: validIndex,
+      isPaused: false,
     })
   }
 
@@ -68,19 +69,25 @@ class Page2 extends React.Component {
       this.nextTrack()
     } else if (this.currentAudio && this.currentAudio.paused) {
       this.currentAudio.play()
+      this.setState({
+        isPaused: false,
+      })
     } else {
       this.currentAudio.pause()
+      this.setState({
+        isPaused: true,
+      })
     }
   }
 
   render() {
-    const { tracks, playing } = this.state;
+    const { tracks, playing, isPaused } = this.state;
     return (
       <div className='Page2__container'>
         <p>My Tracks</p>
         {playing >= 0 && (
           <p>
-            Currently playing: {this.getTrackName(tracks[playing])}
+            {isPaused ? 'Paused' : 'Playing'}: {this.getTrackName(tracks[playing])}
           </p>
         )}
         <button className='btn prevBtn' onClick={this.previousTrack}>
