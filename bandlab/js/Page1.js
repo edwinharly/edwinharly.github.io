@@ -7,7 +7,8 @@ class Page1 extends React.Component {
       posts: [],
     }
 
-    this.sortPosts = this.sortPosts.bind(this);
+    this.sortAscending = this.sortAscending.bind(this);
+    this.sortDescending = this.sortDescending.bind(this);
   }
 
   fetchPosts() {
@@ -16,19 +17,27 @@ class Page1 extends React.Component {
       .then(posts => {
         this.setState({
           posts
-        });
+        }, () => this.sortAscending());
       })
   }
 
-  sortPosts(asc) {
-    // const sortedPosts = this.state.posts.sort((post1, post2) => asc
-    //   ? post1.title > post2.title
-    //   : post1.title < post2.title);
-    const sortedPosts = this.state.posts.sort((post1, post2) => post1.title > post2.title);
+  sortAscending() {
+    const posts = [...this.state.posts];
+    posts.sort((post1, post2) => post1.title.localeCompare(post2.title));
 
     this.setState({
-      posts: sortedPosts,
-      isAsc: asc,
+      posts,
+      isAsc: true,
+    })
+  }
+
+  sortDescending() {
+    const posts = [...this.state.posts];
+    posts.sort((post1, post2) => -(post1.title.localeCompare(post2.title)));
+
+    this.setState({
+      posts,
+      isAsc: false,
     })
   }
 
@@ -42,13 +51,13 @@ class Page1 extends React.Component {
       <div className='Page1__container'>
         <p>My Feed</p>
         {isAsc ? (
-          <button onClick={() => this.sortPosts(false)}>
+          <button className='btn sortBtn' onClick={() => this.sortDescending()}>
             Sort Descending
           </button>
         ) : (
-            <button onClick={() => this.sortPosts(true)}>
+            <button className='btn sortBtn' onClick={() => this.sortAscending()}>
               Sort Ascending
-          </button>
+            </button>
           )}
         <div className='Page1__postsContainer'>
           {posts.map((post) => (

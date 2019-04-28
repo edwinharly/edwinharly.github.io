@@ -83,13 +83,13 @@ class Page2 extends React.Component {
             Currently playing: {this.getTrackName(tracks[playing])}
           </p>
         )}
-        <button onClick={this.previousTrack}>
+        <button className='btn prevBtn' onClick={this.previousTrack}>
           Previous
         </button>
-        <button onClick={this.pauseOrPlay}>
+        <button className='btn playBtn' onClick={this.pauseOrPlay}>
           Pause / Play
         </button>
-        <button onClick={this.nextTrack}>
+        <button className='btn nextBtn' onClick={this.nextTrack}>
           Next
         </button>
         {tracks.map((track, key) => {
@@ -98,7 +98,7 @@ class Page2 extends React.Component {
           return (
             <div className='Page2__track'>
               <div>{trackTitle}</div>
-              <button onClick={() => this.playAudio(key)}>Play</button>
+              <button className='btn playBtn' onClick={() => this.playAudio(key)}>Play</button>
               {/* <audio ref={(input) => this.audioRef = input} key={key} controls>
                 <source src={track} type='audio/ogg'></source>
                 Your browser does not support audio element

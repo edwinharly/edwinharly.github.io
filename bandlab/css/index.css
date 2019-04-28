@@ -17,7 +17,6 @@ body {
 
 .nav li a {
   color: white;
-  padding: 8px;
   text-decoration: none;
 }
 
@@ -41,3 +40,24 @@ body {
     padding: 10px;
   }
 }
+
+.btn {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px 22px;
+  color: white;
+}
+
+.sortBtn {
+  background-color: cornflowerblue;
+}
+
+.playBtn {
+  background-color: darkgreen;
+}
+
+.prevBtn, .nextBtn {
+  background-color: saddlebrown;
+}
+

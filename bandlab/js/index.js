@@ -23,12 +23,12 @@ class App extends React.Component {
         <p className='app_title'>Hi!</p>
         <ul className='nav'>
           <li>
-            <a className={page === 1 ? 'active' : 'inactive'} href="#" onClick={() => this.switchToPage(1)}>
+            <a className={(page === 1 ? 'active' : 'inactive') + ' btn'} href="#" onClick={() => this.switchToPage(1)}>
               My Feed
             </a>
           </li>
           <li>
-            <a className={page === 2 ? 'active' : 'inactive'} href="#" onClick={() => this.switchToPage(2)}>
+            <a className={(page === 2 ? 'active' : 'inactive') + ' btn'} href="#" onClick={() => this.switchToPage(2)}>
               My Tracks
             </a>
           </li>

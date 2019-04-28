@@ -16,10 +16,10 @@
 
 .Post__container {
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
   background-color: darkcyan;
   border-radius: 4px;
-  box-shadow: 2px 2px 2px 3px #000000;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .Post__title {
@@ -29,5 +29,5 @@
 }
 
 .Post__content {
-  color: bisque;
+  color: powderblue;
 }
