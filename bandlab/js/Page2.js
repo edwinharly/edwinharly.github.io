@@ -53,11 +53,15 @@ class Page2 extends React.Component {
   }
 
   nextTrack() {
-    this.playAudio(this.state.playing + 1)
+    if (this.state.tracks.length > 1) {
+      this.playAudio(this.state.playing + 1)
+    }
   }
 
   previousTrack() {
-    this.playAudio(this.state.playing - 1)
+    if (this.state.tracks.length > 1) {
+      this.playAudio(this.state.playing - 1)
+    }
   }
 
   getTrackName(url) {
