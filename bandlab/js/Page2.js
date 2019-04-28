@@ -89,6 +89,9 @@ class Page2 extends React.Component {
   }
 
   addNewTrack(newUrl) {
+    if (newUrl === '') {
+      return;
+    }
     const tracks = [...this.state.tracks, newUrl];
     this.setState({
       tracks,
