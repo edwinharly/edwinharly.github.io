@@ -8,11 +8,20 @@
 @media all and (max-device-width: 599px) {
 
   .Track__container {
-    width: 90%;
+    max-width: 90%;
+    font-size: 48px;
   }
+
+    .Track__container > button {
+        font-size: 36px;
+    }
 
 }
 
 .Track__container > button {
     text-align: center;
+}
+
+.Track__container > div {
+    word-wrap: break-word;
 }

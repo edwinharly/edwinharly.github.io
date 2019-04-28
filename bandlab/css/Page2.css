@@ -1,5 +1,15 @@
-@media all and (max-device-width: 599) {
-  .Page2__container > button, .Page2__track > button {
+@media all and (min-device-width: 600px) {
+  .Page2__tracksContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+  }
+}
+
+@media all and (max-device-width: 599px) {
+  .Page2__container > button {
     font-size: 36px;
     margin: 10px;
   }
@@ -15,14 +25,8 @@
     justify-content: center;
     text-align: left;
   }
-}
 
-@media all and (min-device-width: 600px) {
-  .Page2__tracksContainer {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    text-align: left;
+  .Page2__container > span, .Page2__container > input {
+    font-size: 48px;
   }
 }
